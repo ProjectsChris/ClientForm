@@ -48,7 +48,7 @@ namespace ClientForm
                 txt_porta.Focus();
                 txt_porta.Text = null; // Pulisco la textbox
             }
-
+            
             // Controllo se il numero di porta è errato
             if (nPort <= 0 || nPort >= 65535)
             {
