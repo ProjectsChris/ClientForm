@@ -20,13 +20,13 @@ namespace ClientForm
         public Form1()
         {
             InitializeComponent();
-
-            // Assegno il socket al client
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
         private void btn_Connetti_Click(object sender, EventArgs e)
         {
+            // Assegno il socket al client
+            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
             // Creo le variabili per inserire l'indirizzo IP del server
             IPAddress ipAddress = null;
             int nPort = 0;
@@ -72,6 +72,7 @@ namespace ClientForm
                     // Abilito la textbox e il button
                     txt_messaggio.Enabled = true;
                     btn_invia.Enabled = true;
+                    btn_disconnetti.Enabled = true;
 
                     // Disabilito le textbox e il button
                     txt_ipserver.Enabled = false;
@@ -116,24 +117,8 @@ namespace ClientForm
                     }
                     else
                     {
-                        client.Shutdown(SocketShutdown.Both); // Disabilito la connessione del client
-                        client.Close(); // Chiudo la connessione
-                        client.Dispose(); // Rilascia le risorse non gestite
-                        lst_messaggi.Items.Clear(); // Pulisco la listbox
-                        txt_ipserver.Text = null; // Pulisco la textbox
-                        txt_messaggio.Text = null; // Pulisco la textbox
-                        txt_porta.Text = null; // Pulisco la textbox
-                        txt_ipserver.Focus();
-                        btn_Connetti.Text = "Connetti";
-
-                        // Disabilito la textbox e il button
-                        txt_messaggio.Enabled = false;
-                        btn_invia.Enabled = false;
-
-                        // Abilito le textbox e il button
-                        txt_ipserver.Enabled = true;
-                        txt_porta.Enabled = true;
-                        btn_Connetti.Enabled = true;
+                        // Chiamo il metodo pr chiudere la connessione
+                        ChiusuraConnessione();
                     }
                 }
                 else
@@ -146,6 +131,35 @@ namespace ClientForm
             {
                 MessageBox.Show("Client non è connesso", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Information); // Avviso all'utente dell'errore
             }
+        }
+
+        private void btn_disconnetti_Click(object sender, EventArgs e)
+        {
+            // Chiamo il metodo pr chiudere la connessione
+            ChiusuraConnessione();
+        }
+
+        public void ChiusuraConnessione()
+        {
+            client.Shutdown(SocketShutdown.Both); // Disabilito la connessione del client
+            client.Close(); // Chiudo la connessione
+            client.Dispose(); // Rilascia le risorse non gestite
+            lst_messaggi.Items.Clear(); // Pulisco la listbox
+            txt_ipserver.Text = null; // Pulisco la textbox
+            txt_messaggio.Text = null; // Pulisco la textbox
+            txt_porta.Text = null; // Pulisco la textbox
+            txt_ipserver.Focus();
+            btn_Connetti.Text = "Connetti";
+
+            // Disabilito la textbox e il button
+            txt_messaggio.Enabled = false;
+            btn_invia.Enabled = false;
+            btn_disconnetti.Enabled = false;
+
+            // Abilito le textbox e il button
+            txt_ipserver.Enabled = true;
+            txt_porta.Enabled = true;
+            btn_Connetti.Enabled = true;
         }
     }
 }

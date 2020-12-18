@@ -39,6 +39,7 @@ namespace ClientForm
             this.label3 = new System.Windows.Forms.Label();
             this.txt_messaggio = new System.Windows.Forms.TextBox();
             this.btn_invia = new System.Windows.Forms.Button();
+            this.btn_disconnetti = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txt_ipserver
@@ -91,11 +92,19 @@ namespace ClientForm
             this.btn_invia.UseVisualStyleBackColor = true;
             this.btn_invia.Click += new System.EventHandler(this.btn_invia_Click);
             // 
+            // btn_disconnetti
+            // 
+            resources.ApplyResources(this.btn_disconnetti, "btn_disconnetti");
+            this.btn_disconnetti.Name = "btn_disconnetti";
+            this.btn_disconnetti.UseVisualStyleBackColor = true;
+            this.btn_disconnetti.Click += new System.EventHandler(this.btn_disconnetti_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btn_disconnetti);
             this.Controls.Add(this.btn_invia);
             this.Controls.Add(this.txt_messaggio);
             this.Controls.Add(this.label3);
@@ -123,6 +132,7 @@ namespace ClientForm
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt_messaggio;
         private System.Windows.Forms.Button btn_invia;
+        private System.Windows.Forms.Button btn_disconnetti;
     }
 }
 
